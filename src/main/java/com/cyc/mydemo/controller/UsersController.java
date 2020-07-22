@@ -58,6 +58,28 @@ public class UsersController {
     }
 
     /**
+     * 根据用户名称查询
+     * @param name
+     * @return
+     */
+    @GetMapping("/getUserById/{id}")
+    public Result getUserById(@PathVariable Long id){
+
+        return Result.success(userService.getUserById(id));
+    }
+
+    /**
+     * 根据用户名称查询
+     * @param name
+     * @return
+     */
+    @GetMapping("getUserByName/{name}")
+    public Result getUserByName(@PathVariable String name){
+
+        return Result.success(userService.getUsersByName(name));
+    }
+
+    /**
      * 修改用户
      * @param vo
      * @return
@@ -80,7 +102,9 @@ public class UsersController {
      * @return
      */
     @GetMapping("/page")
-    public Result page(Page<User> page){
+    public Result page(@RequestParam("size")Integer size,@RequestParam("current")Integer current){
+        Page<User> page = new Page<>();
+        page.setCurrent(current).setSize(size);
         IPage<User> resultPage = userService.page(page);
         return Result.success(resultPage);
     }

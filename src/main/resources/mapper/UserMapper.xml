@@ -16,5 +16,9 @@
     <sql id="Base_Column_List">
         id, name, password, salt, create_time, update_time
     </sql>
+    
+    <select id="getUsersByName" parameterType="String" resultType="com.cyc.mydemo.entity.User">
+        select * from user where name like concat('%',#{userName},'%');
+    </select>
 
 </mapper>
