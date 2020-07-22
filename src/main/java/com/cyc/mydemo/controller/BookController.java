@@ -4,6 +4,7 @@ package com.cyc.mydemo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @author cyc
  * @since 2020-07-22
  */
-@Controller
+@RestController
 @RequestMapping("/book")
 public class BookController {
 
