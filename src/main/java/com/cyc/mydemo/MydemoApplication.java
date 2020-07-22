@@ -9,9 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MydemoApplication {
 
     public static void main(String[] args) {
+        long startTIme = System.currentTimeMillis();
         System.out.println("------------------程序开始启动------------------");
         SpringApplication.run(MydemoApplication.class, args);
-        System.out.println("------------------程序启动结束------------------");
+        long endTime = System.currentTimeMillis()-startTIme;
+        System.out.println("------------------程序启动结束，耗时："+endTime+"ms------------------");
 
     }
 

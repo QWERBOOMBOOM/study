@@ -1,4 +1,4 @@
-package com.cyc.mydemo.controller;
+package com.cyc.mydemo.config;
 
 import lombok.Data;
 
