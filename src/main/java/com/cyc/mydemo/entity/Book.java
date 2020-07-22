@@ -2,6 +2,8 @@ package com.cyc.mydemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -27,9 +29,9 @@ public class Book extends Model<Book> {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
 
     private Long authorId;
 

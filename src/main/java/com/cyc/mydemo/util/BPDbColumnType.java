@@ -16,7 +16,7 @@ import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
  */
 public enum BPDbColumnType implements IColumnType {
 
-    DATE("Date", "java.util.Date"),
+    DATE("LocalDateTime", "java.time.LocalDateTime"),
     STRING("String", "java.lang.String"),
     ;
 
