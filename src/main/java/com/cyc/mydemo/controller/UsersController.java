@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cyc.mydemo.config.MyException;
 import com.cyc.mydemo.entity.User;
-import com.cyc.mydemo.entity.vo.UserAddVO;
+import com.cyc.mydemo.entity.vo.UserVO;
 import com.cyc.mydemo.service.UserService;
 import com.cyc.mydemo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class UsersController {
      * @throws MyException
      */
     @PostMapping("/add")
-    public Result add(@RequestBody @Valid UserAddVO user) throws MyException {
+    public Result add(@RequestBody @Valid UserVO user) throws MyException {
 
         if ( userService.count(new LambdaQueryWrapper<User>().eq(User::getName,user.getName()))>1){
             throw new MyException(0001,"已经存在用户");
@@ -63,7 +63,7 @@ public class UsersController {
      * @return
      */
     @PutMapping("/updateUser")
-    public Result updateUser(@RequestBody @Valid UserAddVO vo){
+    public Result updateUser(@RequestBody @Valid UserVO vo){
         User user = new User()
                 .setId(vo.getId())
                 .setName(vo.getName())
