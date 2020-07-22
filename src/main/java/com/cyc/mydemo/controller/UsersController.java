@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class UsersController {
     @PostMapping("/add")
     public Result add(@RequestBody @Valid UserVO user) throws MyException {
 
-        if ( userService.count(new LambdaQueryWrapper<User>().eq(User::getName,user.getName()))>1){
+        if ( userService.count(new LambdaQueryWrapper<User>().eq(User::getName,user.getName()))>0){
             throw new MyException(0001,"已经存在用户");
         }
         User addUser = new User();
@@ -43,7 +44,7 @@ public class UsersController {
                 .setPassword(user.getPassword())
                 .setSalt(user.getSalt())
                 .setAge(user.getAge())
-                .setCreateTime(LocalDate.now());
+                .setCreateTime(LocalDateTime.now());
         if (!userService.save(addUser)){
             throw new MyException(0002,"添加用户失败");
         }
@@ -78,7 +79,7 @@ public class UsersController {
                 .setSalt(vo.getSalt())
                 .setPassword(vo.getPassword())
                 .setAge(vo.getAge())
-                .setUpdateTime(LocalDate.now());
+                .setUpdateTime(LocalDateTime.now());
         LambdaUpdateWrapper<User> lw = new LambdaUpdateWrapper<User>();
         lw.eq(User::getId,vo.getId());
 

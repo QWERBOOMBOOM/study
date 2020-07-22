@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -35,9 +36,9 @@ public class User extends Model<User> {
 
     private String salt;
 
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
-    private LocalDate updateTime;
+    private LocalDateTime updateTime;
 
     private Integer age;
 

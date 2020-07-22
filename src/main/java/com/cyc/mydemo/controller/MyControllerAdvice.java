@@ -14,7 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 public class MyControllerAdvice {
     @ExceptionHandler(MyException.class)
     public Result exceptionResult(MyException e, WebRequest webRequest){
-        log.info("错误信息是:{},{}",e,webRequest);
+        log.error("错误信息是:{},{}",e,webRequest);
         return new Result(e.getCode(),e.getMessage());
     }
 }

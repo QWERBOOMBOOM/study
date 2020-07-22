@@ -1,10 +1,12 @@
 package com.cyc.mydemo.util;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
 @Data
+@Slf4j
 public class Result<T> implements Serializable {
 
     private Integer code;
@@ -32,6 +34,8 @@ public class Result<T> implements Serializable {
         return  new Result<>(0,"success",o);
     }
     public static Result<Object> fail(Object o){
+
+        log.error("错误信息是:{}",o);
         return new Result<>(1,"fail",o);
 
     }
