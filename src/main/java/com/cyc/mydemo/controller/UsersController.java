@@ -22,6 +22,12 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 增加用户
+     * @param user
+     * @return
+     * @throws MyException
+     */
     @PostMapping("/add")
     public Result add(@RequestBody @Valid UserAddVO user) throws MyException {
 
@@ -39,12 +45,23 @@ public class UsersController {
         return Result.success("添加成功");
     }
 
+    /**
+     * 根据用户名称查询
+     * @param name
+     * @return
+     */
     @GetMapping("/{name}")
     public Result getUser(@PathVariable String name){
 
         return Result.success(userService.getOne(new LambdaQueryWrapper<User>()
         .like(User::getName,name)));
     }
+
+    /**
+     * 修改用户
+     * @param vo
+     * @return
+     */
     @PutMapping("/updateUser")
     public Result updateUser(@RequestBody @Valid UserAddVO vo){
         User user = new User()
@@ -57,9 +74,14 @@ public class UsersController {
         return Result.success(result?"修改成功":"修改失败");
     }
 
-    @GetMapping("page")
+    /**
+     * 分页查询
+     * @param page
+     * @return
+     */
+    @GetMapping("/page")
     public Result page(Page<User> page){
-        IPage<User> page1 = userService.page(page);
-        return Result.success(page1);
+        IPage<User> resultPage = userService.page(page);
+        return Result.success(resultPage);
     }
 }
