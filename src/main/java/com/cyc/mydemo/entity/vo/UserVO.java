@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class UserVO {
+
     private Long id;
     @NotNull(message = "姓名不能为空")
     private String name;

@@ -6,6 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: root
+  #统一返回时间类型为时间戳
+#  jackson:
+#    serialization:
+#      write-dates-as-timestamps: true
+    #统一返回时间类型为格式化后的时间
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+
 
 mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）

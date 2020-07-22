@@ -28,7 +28,11 @@ public class Result<T> implements Serializable {
         this.code = code;
         this.data = data;
     }
-    public static Result success(Object o){
+    public static Result<Object> success(Object o){
         return  new Result<>(0,"success",o);
+    }
+    public static Result<Object> fail(Object o){
+        return new Result<>(1,"fail",o);
+
     }
 }
