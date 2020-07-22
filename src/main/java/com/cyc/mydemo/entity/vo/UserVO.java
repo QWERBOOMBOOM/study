@@ -14,6 +14,7 @@ public class UserVO {
     private String name;
     @NotNull(message = "密码不能为空")
     private String password;
+    private Integer age;
 
     private String salt;
 }

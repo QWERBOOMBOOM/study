@@ -10,15 +10,16 @@
         <result column="salt" property="salt" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="age" property="age" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, password, salt, create_time, update_time
+        id, name, password, salt, create_time, update_time, age
     </sql>
     
-    <select id="getUsersByName" parameterType="String" resultType="com.cyc.mydemo.entity.User">
-        select * from user where name like concat('%',#{userName},'%');
+    <select id="getUserByAges" parameterType="java.util.Map" resultType="com.cyc.mydemo.entity.User">
+        select * from user where age &gt;= #{leastAge} and age &lt;= #{maxAge};
     </select>
 
 </mapper>

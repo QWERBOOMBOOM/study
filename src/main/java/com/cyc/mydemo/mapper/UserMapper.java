@@ -9,17 +9,16 @@ import java.util.List;
 
 /**
  * <p>
- * 用户表 Mapper 接口
+ *  Mapper 接口
  * </p>
  *
  * @author cyc
- * @since 2020-07-21
+ * @since 2020-07-22
  */
 public interface UserMapper extends BaseMapper<User> {
+    @Select("select * from user where age between #{leastAge} and #{maxAge}" )
+    List<User> getUserByAge(@Param("leastAge") Integer leastAge, @Param("maxAge")Integer maxAge);
 
-    @Select("select * from user where id = #{id}")
-    User getUserById(Long id);
-
-    List<User> getUsersByName(@Param("userName") String userName);
+    List<User> getUserByAges(@Param("leastAge") Integer leastAge, @Param("maxAge")Integer maxAge);
 
 }

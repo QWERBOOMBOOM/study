@@ -11,11 +11,11 @@ import java.util.List;
 
 /**
  * <p>
- * 用户表 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author cyc
- * @since 2020-07-21
+ * @since 2020-07-22
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -23,12 +23,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     private UserMapper userMapper;
 
-    public User getUserById(Long id){
-        return userMapper.getUserById(id);
+    @Override
+    public List<User> getUserByAge(Integer leastAge, Integer maxAge) {
+        return userMapper.getUserByAge(leastAge,maxAge);
     }
 
     @Override
-    public List<User> getUsersByName(String name) {
-        return userMapper.getUsersByName(name);
+    public List<User> getUserByAges(Integer leastAge, Integer maxAge) {
+        return userMapper.getUserByAges(leastAge, maxAge);
     }
 }

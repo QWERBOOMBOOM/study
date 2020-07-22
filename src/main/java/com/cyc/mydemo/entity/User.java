@@ -11,11 +11,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * 
  * </p>
  *
  * @author cyc
- * @since 2020-07-21
+ * @since 2020-07-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -36,6 +36,8 @@ public class User extends Model<User> {
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer age;
 
 
     @Override

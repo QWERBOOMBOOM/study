@@ -9,14 +9,17 @@ import com.cyc.mydemo.entity.User;
 import com.cyc.mydemo.entity.vo.UserVO;
 import com.cyc.mydemo.service.UserService;
 import com.cyc.mydemo.util.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("/user")
 public class UsersController {
     @Autowired
@@ -38,6 +41,7 @@ public class UsersController {
         addUser.setName(user.getName())
                 .setPassword(user.getPassword())
                 .setSalt(user.getSalt())
+                .setAge(user.getAge())
                 .setCreateTime(new Date());
         if (!userService.save(addUser)){
             throw new MyException(0002,"添加用户失败");
@@ -58,28 +62,6 @@ public class UsersController {
     }
 
     /**
-     * 根据用户名称查询
-     * @param name
-     * @return
-     */
-    @GetMapping("/getUserById/{id}")
-    public Result getUserById(@PathVariable Long id){
-
-        return Result.success(userService.getUserById(id));
-    }
-
-    /**
-     * 根据用户名称查询
-     * @param name
-     * @return
-     */
-    @GetMapping("getUserByName/{name}")
-    public Result getUserByName(@PathVariable String name){
-
-        return Result.success(userService.getUsersByName(name));
-    }
-
-    /**
      * 修改用户
      * @param vo
      * @return
@@ -91,6 +73,7 @@ public class UsersController {
                 .setName(vo.getName())
                 .setSalt(vo.getSalt())
                 .setPassword(vo.getPassword())
+                .setAge(vo.getAge())
                 .setUpdateTime(new Date());
         Boolean result = userService.update(user,new UpdateWrapper<User>());
         return Result.success(result?"修改成功":"修改失败");
@@ -98,7 +81,7 @@ public class UsersController {
 
     /**
      * 分页查询
-     * @param page
+     * @param size
      * @return
      */
     @GetMapping("/page")
@@ -107,5 +90,19 @@ public class UsersController {
         page.setCurrent(current).setSize(size);
         IPage<User> resultPage = userService.page(page);
         return Result.success(resultPage);
+    }
+
+    /**
+     * 范围查询
+     */
+    @GetMapping("/getByAge")
+    public Result getByAge(@RequestParam("leastAge")Integer leastAge,@RequestParam("maxAge")Integer maAge){
+        List<User> userByAge = userService.getUserByAge(leastAge, maAge);
+
+        log.info(userByAge.toString());
+        List<User> userList = userService.getUserByAges(leastAge, maAge);
+        log.info("userList:{}",userList);
+        return Result.success(userService.list(new LambdaQueryWrapper<User>()
+        .between(User::getAge,leastAge,maAge)));
     }
 }

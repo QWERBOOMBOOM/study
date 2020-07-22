@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author cyc
- * @since 2020-07-21
+ * @since 2020-07-22
  */
 @Service
 public class AuthorServiceImpl extends ServiceImpl<AuthorMapper, Author> implements AuthorService {
