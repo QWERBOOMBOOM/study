@@ -6,6 +6,9 @@ import com.cyc.mydemo.repository.DepartRepository;
 import com.cyc.mydemo.util.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +23,11 @@ public class DepartController {
     @Autowired
     private DepartRepository departRepository;
 
+    /**
+     * 增加部门信息
+     * @param vo
+     * @return
+     */
     @PostMapping("/add")
     public Result add(@RequestBody DepartVO vo){
 
@@ -36,6 +44,11 @@ public class DepartController {
         return Result.fail("插入失败");
     }
 
+    /**
+     * 修改部门信息
+     * @param vo
+     * @return
+     */
     @PutMapping
     public Result update(@RequestBody DepartVO vo){
         List<Depart> departByName = departRepository.getDepartByName(vo.getName());
@@ -57,5 +70,16 @@ public class DepartController {
 
         departRepository.updateDepartByName(vo.getId(),vo.getName(),LocalDateTime.now());
         return Result.success("更新成功");
+    }
+
+    /**
+     * 根据名字分页查询
+     * @param name
+     * @param pageable
+     * @return
+     */
+    @GetMapping("page")
+    public Result page(@RequestParam("name") String name ,Pageable pageable){
+        return Result.success(departRepository.findByName(name,pageable));
     }
 }
