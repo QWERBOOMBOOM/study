@@ -13,7 +13,7 @@ public class MydemoApplication {
         System.out.println("------------------程序开始启动------------------");
         SpringApplication.run(MydemoApplication.class, args);
         long endTime = System.currentTimeMillis()-startTIme;
-        System.out.println("------------------程序启动结束，耗时："+endTime+"ms------------------");
+        System.out.println("------------------程序启动结束，耗时："+endTime/60+"s------------------");
 
     }
 
